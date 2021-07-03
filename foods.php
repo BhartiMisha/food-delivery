@@ -20,144 +20,72 @@
         <div class="container">
             <h2 class="text-center">Food Menu</h2>
 
-            <div class='cuisine-sec'>Thai:</div><hr><br>
-        <div class='menu-div'>
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/laab.jpg" alt="thai laab" class="img-responsive img-curve">
-                </div>
+            <?php 
+                //Display Foods that are Active
+                $sql = "SELECT * FROM tbl_food WHERE active='Yes'";
 
-                <div class="food-menu-desc">
-                    <h4>Laab</h4>
-                    <p class="food-price">Rs 200</p>
-                    <p class="food-detail">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos dolorem, expedita nesciunt, corporis, libero tempore distinctio veritatis provident magni itaque animi doloribus saepe modi ab voluptates atque? Voluptates, porro ad?
-                    </p>
-                    <br>
+                //Execute the Query
+                $res=mysqli_query($conn, $sql);
 
-                    <a href="order.php" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                //Count Rows
+                $count = mysqli_num_rows($res);
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/Guay-teow.jpg" alt="Guay Teow" class="img-responsive img-curve">
-                </div>
+                //CHeck whether the foods are availalable or not
+                if($count>0)
+                {
+                    //Foods Available
+                    while($row=mysqli_fetch_assoc($res))
+                    {
+                        //Get the Values
+                        $id = $row['id'];
+                        $title = $row['title'];
+                        $description = $row['description'];
+                        $price = $row['price'];
+                        $image_name = $row['image_name'];
+                        ?>
+                        
+                        <div class="food-menu-box">
+                            <div class="food-menu-img">
+                                <?php 
+                                    //CHeck whether image available or not
+                                    if($image_name=="")
+                                    {
+                                        //Image not Available
+                                        echo "<div class='error'>Image not Available.</div>";
+                                    }
+                                    else
+                                    {
+                                        //Image Available
+                                        ?>
+                                        <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
+                                        <?php
+                                    }
+                                ?>
+                                
+                            </div>
 
-                <div class="food-menu-desc">
-                    <h4>Guay Teow</h4>
-                    <p class="food-price">Rs 500</p>
-                    <p class="food-detail">
-                        Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis, hic? Sunt itaque iusto dolores dolore illo nobis impedit error cumque hic, beatae, ut est autem magnam eveniet facilis aperiam rem!
-                    </p>
-                    <br>
+                            <div class="food-menu-desc">
+                                <h4><?php echo $title; ?></h4>
+                                <p class="food-price">$<?php echo $price; ?></p>
+                                <p class="food-detail">
+                                    <?php echo $description; ?>
+                                </p>
+                                <br>
 
-                    <a href="order.php" class="btn btn-primary">Order Now</a>
-                </div>
-            </div><br><br>
-            <div class='cuisine-sec'>Mexican:</div><hr><br>
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/Chicken-Fajitas.jpg" alt="Chicken Fajita" class="img-responsive img-curve">
-                </div>
+                                <a href="<?php echo SITEURL; ?>order.php?food_id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
+                            </div>
+                        </div>
 
-                <div class="food-menu-desc">
-                    <h4>Chicken Fajita</h4>
-                    <p class="food-price">Rs 450</p>
-                    <p class="food-detail">
-                       Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam voluptas autem deleniti hic aspernatur esse harum natus voluptatibus illo nulla? Aspernatur provident quibusdam nihil ab quaerat adipisci ad nulla distinctio?
-                    </p>
-                    <br>
+                        <?php
+                    }
+                }
+                else
+                {
+                    //Food not Available
+                    echo "<div class='error'>Food not found.</div>";
+                }
+            ?>
 
-                    <a href="order.php" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/pork-chile-verde.jpg" alt="Pork Chile Verde" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Pork Chile Verde</h4>
-                    <p class="food-price">Rs 999</p>
-                    <p class="food-detail">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium et voluptatibus commodi dolorem maxime quo facilis ratione doloremque nam facere architecto iste beatae culpa dignissimos eaque a totam, reprehenderit soluta!
-                    </p>
-                    <br>
-
-                    <a href="order.php" class="btn btn-primary">Order Now</a>
-                </div>
-            </div><br>
-            <div class='cuisine-sec'>Dessert:</div><hr><br>
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/cheesecake.jpg" alt="Cheesecake" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Cheesecake</h4>
-                    <p class="food-price">Rs 890</p>
-                    <p class="food-detail">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis molestias, labore voluptatum cum voluptatibus harum quibusdam eligendi dolore sint animi esse quidem quis in. Laboriosam optio earum iure laborum nemo.
-                    </p>
-                    <br>
-
-                    <a href="order.php" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/Apple Pie.jpg" alt="Apple Pie" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>American Apple Pie</h4>
-                    <p class="food-price">Rs 760</p>
-                    <p class="food-detail">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque illum repudiandae quasi explicabo ipsum omnis accusantium iure facilis non ullam aut, saepe obcaecati nemo doloribus quidem eos deleniti dolorem. Necessitatibus?
-                    </p>
-                    <br>
-
-                    <a href="order.php" class="btn btn-primary">Order Now</a>
-                </div>
-            </div><br>
-            <div class='cuisine-sec'>Drinks</div><hr><br>
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/Cotton Candy Milkshake.jpg" alt="Cotton Candy Milkshake" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Cotton Candy Milk Shake</h4>
-                    <p class="food-price">RS 250</p>
-                    <p class="food-detail">
-                       Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus fuga saepe modi aliquid, deserunt cumque at unde totam ipsa iusto officiis temporibus accusamus? Aspernatur voluptates numquam sunt pariatur fugit deleniti!
-                    </p>
-                    <br>
-
-                    <a href="order.php" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/Ginger Tea.jpg" alt="Ginger Tea" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Ginger Tea</h4>
-                    <p class="food-price">Rs 200</p>
-                    <p class="food-detail">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum magni nihil, amet, quidem, debitis doloribus dolores itaque reprehenderit tempore labore vel! Quo, facere necessitatibus eum commodi fugit pariatur quasi possimus!
-                    </p>
-                    <br>
-
-                    <a href="order.php" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-            </div>
 
 
             <div class="clearfix"></div>

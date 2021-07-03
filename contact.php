@@ -10,8 +10,8 @@ KIIT Square, Patia<br>
 Bhubaneswar
 751024<br><br><br><br><br><br>
 Contact Person:<br><pre>
-Ritik Dubey: 9398******     E-mail: 1929036@kiit.ac.in
-Misha Bharti: 7295******    E-mail: 1929023@kiit.ac.in
+Ritik Dubey: 9398888888     E-mail: 1929036@kiit.ac.in
+Misha Bharti: 7295555555   E-mail: 1929023@kiit.ac.in
 </pre>
 </p>
 

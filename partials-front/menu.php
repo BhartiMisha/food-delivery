@@ -1,3 +1,5 @@
+<?php include('config/constants.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,23 +18,23 @@
         <div class="container">
             <div class="logo">
                 <a href="#" title="Logo">
-                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
+                    <img src="images/foodopedia.jpg" alt="Restaurant Logo" class="img-responsive" style="height:50px">
                 </a>
             </div>
 
             <div class="menu text-right">
                 <ul>
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="<?php echo SITEURL; ?>">Home</a>
                     </li>
                     <li>
-                        <a href="categories.html">Categories</a>
+                        <a href="<?php echo SITEURL; ?>categories.php">Categories</a>
                     </li>
                     <li>
-                        <a href="foods.html">Foods</a>
+                        <a href="<?php echo SITEURL; ?>foods.php">Foods</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="contact.php">Contact</a>
                     </li>
                 </ul>
             </div>

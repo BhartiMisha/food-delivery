@@ -41,11 +41,11 @@
 }
 
 a{
-    color: #ff6b81;
+    color: #00d8d6;
     text-decoration: none;
 }
 a:hover{
-    color: #ff4757;
+    color: #3c40c6;
 }
 
 .btn{
@@ -55,7 +55,7 @@ a:hover{
     border-radius: 5px;
 }
 .btn-primary{
-    background-color: #ff6b81;
+    background-color: #ccae62;
     color: white;
     cursor: pointer;
 }
@@ -110,9 +110,9 @@ fieldset{
 /* CSS for Food SEarch Section */
 
 .food-search{
-    background-image: url(../images/bg.jpg);
+    background-image: url(../images/background.png);
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: repeat-x;
     background-position: center;
     padding: 7% 0;
 }
@@ -132,7 +132,7 @@ fieldset{
 }
 
 .box-3{
-    width: 28%;
+    width: 20%;
     float: left;
     margin: 2%;
 }
@@ -257,3 +257,17 @@ fieldset{
         width: 100%;
     }
 }
+
+.contact{
+    text-align: center;
+    
+    width:100%;
+	margin:auto;
+	max-width:600px;
+	min-height:355px;
+	position:relative;
+	background-color:#a5b1c2;
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+
+

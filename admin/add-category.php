@@ -43,7 +43,7 @@
                     <td><input type="radio" name='active' value="No">No</td>
                 </tr>
                 <tr>
-                <td colspan='2'><input type="submit" name='submit' value='Add Category' class='btn-primary'></td>
+                <td colspan='2'><input type="submit" name="submit" value='Add Category' class='btn-primary'></td>
                 </tr>
                 </pre>
             </table>

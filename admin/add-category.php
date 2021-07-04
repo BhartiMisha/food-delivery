@@ -1,6 +1,6 @@
 <?php include('partials/menu.php'); ?>
 
-<div class="main-content">
+<div class="main admin-main">
     <div class="wrapper">
         <h1>Add Category</h1>
 
@@ -59,13 +59,9 @@
                 </tr>
 
                 <tr>
-<<<<<<< HEAD
-                <td colspan='2'><input type="submit" name="submit" value='Add Category' class='btn-primary'></td>
-=======
                     <td colspan="2">
                         <input type="submit" name="submit" value="Add Category" class="btn-secondary">
                     </td>
->>>>>>> 770eb75fee70b03213529c68b2c297c376ce7ab6
                 </tr>
 
             </table>

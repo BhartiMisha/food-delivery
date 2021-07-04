@@ -1,6 +1,6 @@
 <?php include('partials/menu.php'); ?>
 
-<div class="main-content">
+<div class="main admin-main">
     <div class="wrapper">
         <h1>Update Category</h1>
 

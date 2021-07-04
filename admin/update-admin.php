@@ -1,6 +1,6 @@
 <?php include('partials/menu.php')?>
 
-<div class='admin-main'>
+<div class='main admin-main'>
     <div class='warpper'>
         <h1 style="text-align:center">Update Admin</h1>
         <br><br>
@@ -38,7 +38,7 @@
             }
         
         ?>
-    <div class='category-div'>
+    
         <form action="#" mehtod='post' class='category-form' enctype='multipart/form-data'>
             <table class='tbl-30'> <pre>
                 <tr>
@@ -66,7 +66,7 @@
         </form>
         
     </div>
-</div>
+
 <?php 
 
     //Check whether the Submit Button is Clicked or not

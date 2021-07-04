@@ -1,199 +1,286 @@
-<?php include('partials/menu.php')?>
+<?php include('partials/menu.php'); ?>
 
-<div class='admin-main'>
-    <div class='warpper'>
-        <h1 style="text-align:center">Update Food</h1>
+<?php 
+    //CHeck whether id is set or not 
+    if(isset($_GET['id']))
+    {
+        //Get all the details
+        $id = $_GET['id'];
+
+        //SQL Query to Get the Selected Food
+        $sql2 = "SELECT * FROM tbl_food WHERE id=$id";
+        //execute the Query
+        $res2 = mysqli_query($conn, $sql2);
+
+        //Get the value based on query executed
+        $row2 = mysqli_fetch_assoc($res2);
+
+        //Get the Individual Values of Selected Food
+        $title = $row2['title'];
+        $description = $row2['description'];
+        $price = $row2['price'];
+        $current_image = $row2['image_name'];
+        $current_category = $row2['category_id'];
+        $featured = $row2['featured'];
+        $active = $row2['active'];
+
+    }
+    else
+    {
+        //Redirect to Manage Food
+        header('location:'.SITEURL.'admin/manage-food.php');
+    }
+?>
+
+
+<div class="main admin-main">
+    <div class="wrapper">
+        <h1>Update Food</h1>
         <br><br>
-    <div class='category-div'>
-        <form action="#" mehtod='post' class='category-form' enctype='multipart/form-data'>
-            <table class='tbl-30'> <pre>
-                <tr>
-                    <td>Title</td>
-                    <td><input type="text" name='title' placeholder="Food title"></td>
-                </tr>
-                <tr>
-                    <td>Description: </td>
-                    <td>
-                        <textarea name="description" cols="30" rows="5" placeholder="Description of the Food."></textarea>
-                    </td>
-                </tr>
 
-                <tr>
-                    <td>Price: </td>
-                    <td>
-                        <input type="number" name="price">
-                    </td>
-                </tr>
+        <form action="" method="POST" enctype="multipart/form-data">
+        
+        <table class="tbl-30">
 
-                <tr>
-                    <td>Select Image: </td>
-                    <td>
-                        <input type="file" name="image">
-                    </td>
-                </tr>
+            <tr>
+                <td>Title: </td>
+                <td>
+                    <input type="text" name="title" value="<?php echo $title; ?>">
+                </td>
+            </tr>
 
-                <tr>
-                    <td>Category: </td>
-                    <td>
-                        <select name="category">
+            <tr>
+                <td>Description: </td>
+                <td>
+                    <textarea name="description" cols="30" rows="5"><?php echo $description; ?></textarea>
+                </td>
+            </tr>
 
-                           <option value="">Select an option</option>
+            <tr>
+                <td>Price: </td>
+                <td>
+                    <input type="number" name="price" value="<?php echo $price; ?>">
+                </td>
+            </tr>
 
-                        </select>
-                    </td>
-                </tr>
+            <tr>
+                <td>Current Image: </td>
+                <td>
+                    <?php 
+                        if($current_image == "")
+                        {
+                            //Image not Available 
+                            echo "<div class='error'>Image not Available.</div>";
+                        }
+                        else
+                        {
+                            //Image Available
+                            ?>
+                            <img src="<?php echo SITEURL; ?>images/food/<?php echo $current_image; ?>" width="150px">
+                            <?php
+                        }
+                    ?>
+                </td>
+            </tr>
 
-                <tr>
-                    <td>Featured: </td>
-                    <td>
-                        <input type="radio" name="featured" value="Yes"> Yes 
-                        <input type="radio" name="featured" value="No"> No
-                    </td>
-                </tr>
+            <tr>
+                <td>Select New Image: </td>
+                <td>
+                    <input type="file" name="image">
+                </td>
+            </tr>
 
-                <tr>
-                    <td>Active: </td>
-                    <td>
-                        <input type="radio" name="active" value="Yes"> Yes 
-                        <input type="radio" name="active" value="No"> No
-                    </td>
-                </tr>
+            <tr>
+                <td>Category: </td>
+                <td>
+                    <select name="category">
 
-                <tr>
-                    <td colspan="2">
-                        <input type="submit" name="submit" value="Add Food" class="btn-secondary">
-                    </td>
-                </tr>
+                        <?php 
+                            //Query to Get ACtive Categories
+                            $sql = "SELECT * FROM tbl_category WHERE active='Yes'";
+                            //Execute the Query
+                            $res = mysqli_query($conn, $sql);
+                            //Count Rows
+                            $count = mysqli_num_rows($res);
 
-            </table>
+                            //Check whether category available or not
+                            if($count>0)
+                            {
+                                //CAtegory Available
+                                while($row=mysqli_fetch_assoc($res))
+                                {
+                                    $category_title = $row['title'];
+                                    $category_id = $row['id'];
+                                    
+                                    //echo "<option value='$category_id'>$category_title</option>";
+                                    ?>
+                                    <option <?php if($current_category==$category_id){echo "selected";} ?> value="<?php echo $category_id; ?>"><?php echo $category_title; ?></option>
+                                    <?php
+                                }
+                            }
+                            else
+                            {
+                                //CAtegory Not Available
+                                echo "<option value='0'>Category Not Available.</option>";
+                            }
 
+                        ?>
+
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Featured: </td>
+                <td>
+                    <input <?php if($featured=="Yes") {echo "checked";} ?> type="radio" name="featured" value="Yes"> Yes 
+                    <input <?php if($featured=="No") {echo "checked";} ?> type="radio" name="featured" value="No"> No 
+                </td>
+            </tr>
+
+            <tr>
+                <td>Active: </td>
+                <td>
+                    <input <?php if($active=="Yes") {echo "checked";} ?> type="radio" name="active" value="Yes"> Yes 
+                    <input <?php if($active=="No") {echo "checked";} ?> type="radio" name="active" value="No"> No 
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
+                    <input type="hidden" name="current_image" value="<?php echo $current_image; ?>">
+
+                    <input type="submit" name="submit" value="Update Food" class="btn-secondary">
+                </td>
+            </tr>
+        
+        </table>
+        
         </form>
 
-                            </div>
-                            </div>
-                            </div>
-
-        
         <?php 
-
-            //CHeck whether the button is clicked or not
+        
             if(isset($_POST['submit']))
             {
-                //Add the Food in Database
-                //echo "Clicked";
-                
-                //1. Get the DAta from Form
+                //echo "Button Clicked";
+
+                //1. Get all the details from the form
+                $id = $_POST['id'];
                 $title = $_POST['title'];
                 $description = $_POST['description'];
                 $price = $_POST['price'];
+                $current_image = $_POST['current_image'];
                 $category = $_POST['category'];
 
-                //Check whether radion button for featured and active are checked or not
-                if(isset($_POST['featured']))
-                {
-                    $featured = $_POST['featured'];
-                }
-                else
-                {
-                    $featured = "No"; //SEtting the Default Value
-                }
+                $featured = $_POST['featured'];
+                $active = $_POST['active'];
 
-                if(isset($_POST['active']))
-                {
-                    $active = $_POST['active'];
-                }
-                else
-                {
-                    $active = "No"; //Setting Default Value
-                }
+                //2. Upload the image if selected
 
-                //2. Upload the Image if selected
-                //Check whether the select image is clicked or not and upload the image only if the image is selected
+                //CHeck whether upload button is clicked or not
                 if(isset($_FILES['image']['name']))
                 {
-                    //Get the details of the selected image
-                    $image_name = $_FILES['image']['name'];
+                    //Upload BUtton Clicked
+                    $image_name = $_FILES['image']['name']; //New Image NAme
 
-                    //Check Whether the Image is Selected or not and upload image only if selected
+                    //CHeck whether th file is available or not
                     if($image_name!="")
                     {
-                        // Image is SElected
-                        //A. REnamge the Image
-                        //Get the extension of selected image (jpg, png, gif, etc.) "vijay-thapa.jpg" vijay-thapa jpg
-                        $ext = end(explode('.', $image_name));
+                        //IMage is Available
+                        //A. Uploading New Image
 
-                        // Create New Name for Image
-                        $image_name = "Food-Name-".rand(0000,9999).".".$ext; //New Image Name May Be "Food-Name-657.jpg"
+                        //REname the Image
+                        $ext = end(explode('.', $image_name)); //Gets the extension of the image
 
-                        //B. Upload the Image
-                        //Get the Src Path and DEstinaton path
+                        $image_name = "Food-Name-".rand(0000, 9999).'.'.$ext; //THis will be renamed image
 
-                        // Source path is the current location of the image
-                        $src = $_FILES['image']['tmp_name'];
+                        //Get the Source Path and DEstination PAth
+                        $src_path = $_FILES['image']['tmp_name']; //Source Path
+                        $dest_path = "../images/food/".$image_name; //DEstination Path
 
-                        //Destination Path for the image to be uploaded
-                        $dst = "../images/food/".$image_name;
+                        //Upload the image
+                        $upload = move_uploaded_file($src_path, $dest_path);
 
-                        //Finally Uppload the food image
-                        $upload = move_uploaded_file($src, $dst);
-
-                        //check whether image uploaded of not
+                        /// CHeck whether the image is uploaded or not
                         if($upload==false)
                         {
-                            //Failed to Upload the image
-                            //REdirect to Add Food Page with Error Message
-                            $_SESSION['upload'] = "<div class='error'>Failed to Upload Image.</div>";
-                            header('location:'.SITEURL.'admin/add-food.php');
-                            //STop the process
+                            //FAiled to Upload
+                            $_SESSION['upload'] = "<div class='error'>Failed to Upload new Image.</div>";
+                            //REdirect to Manage Food 
+                            header('location:'.SITEURL.'admin/manage-food.php');
+                            //Stop the Process
                             die();
                         }
+                        //3. Remove the image if new image is uploaded and current image exists
+                        //B. Remove current Image if Available
+                        if($current_image!="")
+                        {
+                            //Current Image is Available
+                            //REmove the image
+                            $remove_path = "../images/food/".$current_image;
 
+                            $remove = unlink($remove_path);
+
+                            //Check whether the image is removed or not
+                            if($remove==false)
+                            {
+                                //failed to remove current image
+                                $_SESSION['remove-failed'] = "<div class='error'>Faile to remove current image.</div>";
+                                //redirect to manage food
+                                header('location:'.SITEURL.'admin/manage-food.php');
+                                //stop the process
+                                die();
+                            }
+                        }
                     }
-
+                    else
+                    {
+                        $image_name = $current_image; //Default Image when Image is Not Selected
+                    }
                 }
                 else
                 {
-                    $image_name = ""; //SEtting DEfault Value as blank
+                    $image_name = $current_image; //Default Image when Button is not Clicked
                 }
 
-                //3. Insert Into Database
+                
 
-                //Create a SQL Query to Save or Add food
-                // For Numerical we do not need to pass value inside quotes '' But for string value it is compulsory to add quotes ''
-                $sql2 = "INSERT INTO tbl_food SET 
+                //4. Update the Food in Database
+                $sql3 = "UPDATE tbl_food SET 
                     title = '$title',
                     description = '$description',
                     price = $price,
                     image_name = '$image_name',
-                    category_id = $category,
+                    category_id = '$category',
                     featured = '$featured',
                     active = '$active'
+                    WHERE id=$id
                 ";
 
-                //Execute the Query
-                $res2 = mysqli_query($conn, $sql2);
+                //Execute the SQL Query
+                $res3 = mysqli_query($conn, $sql3);
 
-                //CHeck whether data inserted or not
-                //4. Redirect with MEssage to Manage Food page
-                if($res2 == true)
+                //CHeck whether the query is executed or not 
+                if($res3==true)
                 {
-                    //Data inserted Successfullly
-                    $_SESSION['add'] = "<div class='success'>Food Added Successfully.</div>";
+                    //Query Exectued and Food Updated
+                    $_SESSION['update'] = "<div class='success'>Food Updated Successfully.</div>";
                     header('location:'.SITEURL.'admin/manage-food.php');
                 }
                 else
                 {
-                    //FAiled to Insert Data
-                    $_SESSION['add'] = "<div class='error'>Failed to Add Food.</div>";
+                    //Failed to Update Food
+                    $_SESSION['update'] = "<div class='error'>Failed to Update Food.</div>";
                     header('location:'.SITEURL.'admin/manage-food.php');
                 }
 
                 
             }
-
+        
         ?>
 
-
-    
+    </div>
+</div>
 
 <?php include('partials/footer.php'); ?>

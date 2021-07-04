@@ -1,59 +1,75 @@
-<?php include('partials/menu.php')?>
+<?php include('partials/menu.php'); ?>
 
-<div class='admin-main'>
-    <div class='wrapper'>
-        <h1 style="text-align:center">Add Category</h1>
+<div class="main-content">
+    <div class="wrapper">
+        <h1>Add Category</h1>
+
         <br><br>
+
         <?php 
         
-        if(isset($_SESSION['add']))
-        {
-            echo $_SESSION['add'];
-            unset($_SESSION['add']);
-        }
+            if(isset($_SESSION['add']))
+            {
+                echo $_SESSION['add'];
+                unset($_SESSION['add']);
+            }
 
-        if(isset($_SESSION['upload']))
-        {
-            echo $_SESSION['upload'];
-            unset($_SESSION['upload']);
-        }
-    
-    ?>
-    <div class='category-div'>
-        <form action="#" mehtod='post' class='category-form' enctype='multipart/form-data'>
-            <table class='tbl-30'> <pre>
-                <tr>
-                    <td>Title</td>
-                    <td><input type="text" name='title' placeholder="Category title"></td>
-                </tr>
-                <tr>
-                    <td>
-                        Select Image
-                    </td>
-                    <td><input type="file" name='image'></td>
-                </tr>
-                <tr>
-                    <td>Featured</td>
-                    <td><input type="radio" name='featured' value="Yes">Yes</td>
-                    <td><input type="radio" name='featured' value="No">No</td>
-                </tr>
-                <tr>
-                    <td>Active</td>
-                    <td><input type="radio" name='active' value="Yes">Yes</td>
-                    <td><input type="radio" name='active' value="No">No</td>
-                </tr>
-                <tr>
-                <td colspan='2'><input type="submit" name='submit' value='Add Category' class='btn-primary'></td>
-                </tr>
-                </pre>
-            </table>
-            </div>
-        </form>
+            if(isset($_SESSION['upload']))
+            {
+                echo $_SESSION['upload'];
+                unset($_SESSION['upload']);
+            }
         
-    </div>
-</div>
+        ?>
 
-<?php 
+        <br><br>
+
+        <!-- Add CAtegory Form Starts -->
+        <form action="" method="POST" enctype="multipart/form-data">
+
+            <table class="tbl-30">
+                <tr>
+                    <td>Title: </td>
+                    <td>
+                        <input type="text" name="title" placeholder="Category Title">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Select Image: </td>
+                    <td>
+                        <input type="file" name="image">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Featured: </td>
+                    <td>
+                        <input type="radio" name="featured" value="Yes"> Yes 
+                        <input type="radio" name="featured" value="No"> No 
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Active: </td>
+                    <td>
+                        <input type="radio" name="active" value="Yes"> Yes 
+                        <input type="radio" name="active" value="No"> No 
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" name="submit" value="Add Category" class="btn-secondary">
+                    </td>
+                </tr>
+
+            </table>
+
+        </form>
+        <!-- Add CAtegory Form Ends -->
+
+        <?php 
         
             //CHeck whether the Submit Button is Clicked or Not
             if(isset($_POST['submit']))

@@ -1,16 +1,30 @@
-<?php include('partials/menu.php')?>
+<?php include('partials/menu.php'); ?>
 
-<div class='admin-main'>
-    <div class='warpper'>
-        <h1 style="text-align:center">Add Food</h1>
+<div class="main-content">
+    <div class="wrapper">
+        <h1>Add Food</h1>
+
         <br><br>
-    <div class='category-div'>
-        <form action="#" mehtod='post' class='category-form' enctype='multipart/form-data'>
-            <table class='tbl-30'> <pre>
+
+        <?php 
+            if(isset($_SESSION['upload']))
+            {
+                echo $_SESSION['upload'];
+                unset($_SESSION['upload']);
+            }
+        ?>
+
+        <form action="" method="POST" enctype="multipart/form-data">
+        
+            <table class="tbl-30">
+
                 <tr>
-                    <td>Title</td>
-                    <td><input type="text" name='title' placeholder="Food title"></td>
+                    <td>Title: </td>
+                    <td>
+                        <input type="text" name="title" placeholder="Title of the Food">
+                    </td>
                 </tr>
+
                 <tr>
                     <td>Description: </td>
                     <td>
@@ -106,10 +120,6 @@
             </table>
 
         </form>
-
-                            </div>
-                            </div>
-                            </div>
 
         
         <?php 
@@ -232,6 +242,7 @@
         ?>
 
 
-    
+    </div>
+</div>
 
 <?php include('partials/footer.php'); ?>

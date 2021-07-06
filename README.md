@@ -50,12 +50,13 @@ $db_select = mysqli_select_db($conn, DB_NAME) or die(mysqli_error()); //SElectin
 6. Now, Open the project in your browser. It should run perfectly.  
 ## Software Used
 - Html and css for(UI)
-- php
+- php 
+   * The simplicity of coding, easy learning, and a faster approach makes PHP a lot better than the other complex programming languages. PHP is an open source language,        making web development an efficient and more interactive task for the developers.
 
 
 ## Developers
  - Misha Bharti developed the UI of the website .
- - Ritik DUbey developed the Database and query for the backend.
+ - Ritik Dubey developed the Database and query for the backend.
  
 ## Future updates 
 - Users can have the facility of tracking their order

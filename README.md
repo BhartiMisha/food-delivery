@@ -1,8 +1,8 @@
 # 🥘 food-delivery
    Foodopedia is a website providing users to order there convenient food from the active and featured categories.  
    Admins can perform the following things 
-   - Add,delete or update admins
-   - add,delete or upadte food and categories
+   - Add, delete or update admins
+   - add, delete or update food and categories
  
 
 ## Installation
